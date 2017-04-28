@@ -35,12 +35,12 @@ p = g
 def dvadva():
    """nn = y / 2 + y
    mm = x / 2 + x"""
-   nn = y / 5
-   yy = x / 5
+   nn = y / 3
+   yy = x / 2.5
    canvas.create_rectangle(yy, nn, yy + 60, nn + 90, fill='blue')
    canvas.create_rectangle(yy + 95, nn, yy + 60 + 95, nn + 90, fill='blue')
-   #canvas.create_rectangle(yy, nn + 95, yy + 60 + 95, nn + 90, fill='blue')
-   #canvas.create_rectangle(yy, nn, yy + 60, nn + 90, fill='blue')
+   canvas.create_rectangle(yy, nn + 125, yy + 60, nn + 90 + 125, fill='blue')
+   canvas.create_rectangle(yy + 95, nn + 125, yy + 60 + 95, nn + 90 + 125, fill='blue')
    canvas.pack()
 def myFunc():
     print(spin.get())
