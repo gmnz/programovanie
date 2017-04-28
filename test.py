@@ -11,9 +11,11 @@ def novahra():
    button2.pack()
 def onas():
    messagebox.showinfo( "O nas!", "Lorem Ipsum...")
-yy = ctypes.windll.user32
-x = yy.GetSystemMetrics(0) 
-y = yy.GetSystemMetrics(1) - 120
+#yy = ctypes.windll.user32
+#x = yy.GetSystemMetrics(0) 
+#y = yy.GetSystemMetrics(1) - 120
+x = 800
+y = 600
 root = Tk()
 canvas = Canvas(root, width = x, height = y)
 canvas.pack()
