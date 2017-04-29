@@ -1,6 +1,7 @@
 from tkinter import * 
 #ak sa nemylim, tak ta hviezdicka znamena importuj vsetko z kniznice, cize ten import pod tym uz nie je potrebny
 #from tkinter import messagebox
+from tkinter import messagebox #toto treba pre časť menu info - vyskakovacie okno 
 import ctypes # to este neviem, co je
 
 #own code
