@@ -1,6 +1,11 @@
-from tkinter import *
-from tkinter import messagebox
-import ctypes
+from tkinter import * 
+#ak sa nemylim, tak ta hviezdicka znamena importuj vsetko z kniznice, cize ten import pod tym uz nie je potrebny
+#from tkinter import messagebox
+import ctypes 
+
+#own code
+from classes.card import Card #importovanie triedy karta
+
 def novahra():
    filewin = Toplevel(root)
    button = Button(filewin, text="2x2", height= 3, width = 20, command=dvadva)
@@ -9,13 +14,16 @@ def novahra():
    button.pack()
    button1.pack()
    button2.pack()
+
 def onas():
    messagebox.showinfo( "O nas!", "Lorem Ipsum...")
+
 #yy = ctypes.windll.user32
 #x = yy.GetSystemMetrics(0) 
 #y = yy.GetSystemMetrics(1) - 120
 x = 800
 y = 600
+
 root = Tk()
 canvas = Canvas(root, width = x, height = y)
 canvas.pack()
@@ -34,6 +42,7 @@ root.config(menu=menubar)
 i = 1
 g = 55
 p = g
+
 def dvadva():
    """nn = y / 2 + y
    mm = x / 2 + x"""
@@ -44,6 +53,7 @@ def dvadva():
    canvas.create_rectangle(yy, nn + 125, yy + 60, nn + 90 + 125, fill='blue')
    canvas.create_rectangle(yy + 95, nn + 125, yy + 60 + 95, nn + 90 + 125, fill='blue')
    canvas.pack()
+
 def myFunc():
     print(spin.get())
     a = int(spin.get())
@@ -57,6 +67,9 @@ def myFunc():
     
     canvas.create_rectangle(d, 1, b, 80, fill='blue')
     canvas.pack()
+
+c1 = Card(1, 50, 50, 100, 100, canvas)
+canvas.pack()
 
 spin = Spinbox(root, from_ = 0, to = 300, command=myFunc)
 spin.pack()
