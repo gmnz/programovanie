@@ -78,14 +78,17 @@ def myFunc():
     canvas.create_rectangle(d, 1, b, 80, fill='blue')
     canvas.pack()
 
+def onObjectClick(event):
+    canvas.delete(event.widget.find_closest(event.x, event.y))
+
 #priklad pouzitia novovytvorenej triedy Card
-c1 = Card(1, 50, 50, 100, 100, canvas)
+c1 = Card(50, 50, 100, 100, canvas)
+canvas.tag_bind(c1.back, '<ButtonPress-1>', onObjectClick)
 canvas.pack()
 
 #ciselnik pridavame do okna, moze sa hybat v rozsahu hodnot 0 az 300 a zmena jeho hodnoty vola funkciu myFunc
 spin = Spinbox(root, from_ = 0, to = 300, command=myFunc)
 #pridanie ciselniku
 spin.pack()
-
 
 root.mainloop()
