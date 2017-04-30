@@ -3,7 +3,7 @@ from tkinter import *
 #from tkinter import messagebox
 from tkinter import messagebox #toto treba pre časť menu info - vyskakovacie okno 
 import ctypes # to este neviem, co je
-
+import random
 #own code
 from classes.card import Card #importovanie triedy Card
 
@@ -55,14 +55,30 @@ g = 55
 p = g
 
 def dvadva():
-   """nn = y / 2 + y
-   mm = x / 2 + x"""
+   cisla = [1, 2, 3, 4]
+   random.shuffle(cisla)
+   if cisla[0] == 1 or cisla[0] == 2:
+      color1 = "orange"
+   else:
+      color1 = "green"
+   if cisla[1] == 1 or cisla[1] == 2:
+      color2 = "orange"
+   else:
+      color2 = "green"
+   if cisla[2] == 1 or cisla[2] == 2:
+      color3 = "orange"
+   else:
+      color3 = "green"
+   if cisla[3] == 1 or cisla[3] == 2:
+      color4 = "orange"
+   else:
+      color4 = "green"
    nn = y / 3
    yy = x / 2.5
-   canvas.create_rectangle(yy, nn, yy + 60, nn + 90, fill='blue')
-   canvas.create_rectangle(yy + 95, nn, yy + 60 + 95, nn + 90, fill='blue')
-   canvas.create_rectangle(yy, nn + 125, yy + 60, nn + 90 + 125, fill='blue')
-   canvas.create_rectangle(yy + 95, nn + 125, yy + 60 + 95, nn + 90 + 125, fill='blue')
+   canvas.create_rectangle(yy, nn, yy + 60, nn + 90, fill=color1)
+   canvas.create_rectangle(yy + 95, nn, yy + 60 + 95, nn + 90, fill=color2)
+   canvas.create_rectangle(yy, nn + 125, yy + 60, nn + 90 + 125, fill=color3)
+   canvas.create_rectangle(yy + 95, nn + 125, yy + 60 + 95, nn + 90 + 125, fill=color4)
    canvas.pack()
 
 def myFunc():
@@ -79,14 +95,17 @@ def myFunc():
     canvas.create_rectangle(d, 1, b, 80, fill='blue')
     canvas.pack()
 
+def onObjectClick(event):
+    canvas.delete(event.widget.find_closest(event.x, event.y))
+
 #priklad pouzitia novovytvorenej triedy Card
-c1 = Card(1, 50, 50, 100, 100, canvas)
-canvas.pack()
+c1 = Card(0, 800 / 2.5, 600 / 3, 800 / 2.5 + 60, 600 / 3 + 90, canvas) #vytvorime a nastavime parametre karty
+canvas.tag_bind(c1.back, '<ButtonPress-1>', onObjectClick) #prepojime funkciu so zadnou stranou karty
+canvas.pack() 
 
 #ciselnik pridavame do okna, moze sa hybat v rozsahu hodnot 0 az 300 a zmena jeho hodnoty vola funkciu myFunc
 spin = Spinbox(root, from_ = 0, to = 300, command=myFunc)
 #pridanie ciselniku
 spin.pack()
-
 
 root.mainloop()
