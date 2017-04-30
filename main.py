@@ -55,9 +55,9 @@ g = 55
 p = g
 
 def dvadva():
-   cisla = [1, 2, 3, 4]
-   random.shuffle(cisla)
-   if cisla[0] == 1 or cisla[0] == 2:
+   cisla = [1, 2, 3, 4] #Vytvoril som list so 4 cislami - pre kazdu kartu jedno cislo
+   random.shuffle(cisla) #tento "command" zamiesa cisla v liste
+   if cisla[0] == 1 or cisla[0] == 2: #tuto sa vlastne porovnava hodnota
       color1 = "orange"
    else:
       color1 = "green"
