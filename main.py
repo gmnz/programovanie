@@ -83,9 +83,9 @@ def onObjectClick(event):
     canvas.delete(event.widget.find_closest(event.x, event.y))
 
 #priklad pouzitia novovytvorenej triedy Card
-c1 = Card(50, 50, 100, 100, canvas)
-canvas.tag_bind(c1.back, '<ButtonPress-1>', onObjectClick)
-canvas.pack()
+c1 = Card(0, 50, 50, 100, 100, canvas) #vytvorime a nastavime parametre karty
+canvas.tag_bind(c1.back, '<ButtonPress-1>', onObjectClick) #prepojime funkciu so zadnou stranou karty
+canvas.pack() 
 
 #ciselnik pridavame do okna, moze sa hybat v rozsahu hodnot 0 az 300 a zmena jeho hodnoty vola funkciu myFunc
 spin = Spinbox(root, from_ = 0, to = 300, command=myFunc)
