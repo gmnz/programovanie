@@ -79,12 +79,25 @@ def myFunc():
     canvas.create_rectangle(d, 1, b, 80, fill='blue')
     canvas.pack()
 
+global deck #balicek kariet, global aby sme ho mohli volat aj vo funkciach
+
 def onObjectClick(event):
-    canvas.delete(event.widget.find_closest(event.x, event.y))
+    clicked_card = event.widget.find_closest(event.x, event.y)[0] #zistime na chrbat ktorej karty bolo kliknute
+    for card in deck: #prejdeme kartami v balicku
+        if card.back == clicked_card: #ak chrbat karty v balicku == chrbtu kliknutej karty
+            print(card.id) #id karty, ktora bude zmazana
+            deck.remove(card) #zmaz kartu z balicku
+            canvas.delete(card.back) #zmaz kartu z platna
 
 #priklad pouzitia novovytvorenej triedy Card
+deck = list() #z balicku robim zoznam
 c1 = Card(0, 50, 50, 100, 100, canvas) #vytvorime a nastavime parametre karty
 canvas.tag_bind(c1.back, '<ButtonPress-1>', onObjectClick) #prepojime funkciu so zadnou stranou karty
+deck.append(c1) #pridanie karty na koniec balicku
+c2 = Card(1, 110, 50, 160, 100, canvas) #vytvorime a nastavime parametre karty
+canvas.tag_bind(c2.back, '<ButtonPress-1>', onObjectClick) #prepojime funkciu so zadnou stranou karty
+deck.append(c2) #pridanie karty na koniec balicku
+
 canvas.pack() 
 
 #ciselnik pridavame do okna, moze sa hybat v rozsahu hodnot 0 az 300 a zmena jeho hodnoty vola funkciu myFunc
