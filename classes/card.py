@@ -1,4 +1,4 @@
-class Card:
+class Card: #vlastna trieda, ktora ma nejake vlastnosti
 
     def __init__(self, id, x, y, xx, yy, canvas): #tato procedura sa spusti, ked je vytvoreny novy objekt triedy Card 
         self.id = id #priradenie id karte, rovnake karty budu mat rovnake id

@@ -1,12 +1,11 @@
-from tkinter import * 
-#ak sa nemylim, tak ta hviezdicka znamena importuj vsetko z kniznice, cize ten import pod tym uz nie je potrebny
-#from tkinter import messagebox
+from tkinter import * #hviezdicka znamena, ze pridaj VSETKO z kniznice tkinter
 from tkinter import messagebox #toto treba pre časť menu info - vyskakovacie okno 
-import ctypes # to este neviem, co je
+import ctypes #kniznice na zistenie rozmerov okna, momentlane nevyuzita
 
-#own code
+#pridanie vlastnej triedy do programu
 from classes.card import Card #importovanie triedy Card
 
+#Petove podokienko
 def novahra():
    filewin = Toplevel(root)
    button = Button(filewin, text="2x2", height= 3, width = 20, command=dvadva)
@@ -33,8 +32,6 @@ root = Tk()
 
 #v okne vytvorim platno, na ktore sa da kreslit ciary, utvary...
 canvas = Canvas(root, width = x, height = y)
-#este netreba zobrazit to, co je na platne, lebo na nom nic neni
-#canvas.pack()
 
 menubar = Menu(root) #vytvorim menu
 hra = Menu(menubar, tearoff=0) #podmenu, neviem co je tearoff
@@ -47,6 +44,7 @@ menubar.add_cascade(label="Hra", menu=hra) #pridanie podmenu na hlavny panel men
 info = Menu(menubar, tearoff=0)
 info.add_command(label="O nás!", command=onas)
 menubar.add_cascade(label="Info", menu=info)
+#pridanie menu do okna
 root.config(menu=menubar)
 
 #Petove vypocty
@@ -65,6 +63,7 @@ def dvadva():
    canvas.create_rectangle(yy + 95, nn + 125, yy + 60 + 95, nn + 90 + 125, fill='blue')
    canvas.pack()
 
+#funkcia volana Spinboxom
 def myFunc():
     print(spin.get())
     a = int(spin.get())
@@ -81,6 +80,7 @@ def myFunc():
 
 global deck #balicek kariet, global aby sme ho mohli volat aj vo funkciach
 
+#funkcia volana po kliknuti na kartu
 def onObjectClick(event):
     clicked_card = event.widget.find_closest(event.x, event.y)[0] #zistime na chrbat ktorej karty bolo kliknute
     for card in deck: #prejdeme kartami v balicku
@@ -98,6 +98,7 @@ c2 = Card(1, 110, 50, 160, 100, canvas) #vytvorime a nastavime parametre karty
 canvas.tag_bind(c2.back, '<ButtonPress-1>', onObjectClick) #prepojime funkciu so zadnou stranou karty
 deck.append(c2) #pridanie karty na koniec balicku
 
+#pridanie platna do okna
 canvas.pack() 
 
 #ciselnik pridavame do okna, moze sa hybat v rozsahu hodnot 0 az 300 a zmena jeho hodnoty vola funkciu myFunc
@@ -105,4 +106,4 @@ spin = Spinbox(root, from_ = 0, to = 300, command=myFunc)
 #pridanie ciselniku
 spin.pack()
 
-root.mainloop()
+root.mainloop() #cykli okno, teda nechaj ho otvorene
