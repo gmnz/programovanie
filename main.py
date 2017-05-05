@@ -7,6 +7,7 @@ import random
 #own code
 from classes.card import Card #importovanie triedy Card
 
+
 def novahra():
    filewin = Toplevel(root)
    button = Button(filewin, text="2x2", height= 3, width = 20, command=dvadva)
@@ -27,7 +28,6 @@ def onas():
 #zatial si dam staticku velkost okna
 x = 800
 y = 600
-
 #vytvorim okno
 root = Tk() 
 
@@ -49,30 +49,43 @@ info.add_command(label="O nás!", command=onas)
 menubar.add_cascade(label="Info", menu=info)
 root.config(menu=menubar)
 
+global deck #balicek kariet, global aby sme ho mohli volat aj vo funkciach
+deck = list()
+
 #Petove vypocty
+card_id1 = 0
+card_id2 = 2
 i = 1
 g = 55
 p = g
-
+z = 0
 def dvadva():
-   cisla = [1, 2, 3, 4] #Vytvoril som list so 4 cislami - pre kazdu kartu jedno cislo
+   cisla = [1, 1, 2, 2] #Vytvoril som list so 4 cislami - pre kazdu kartu jedno cislo
    random.shuffle(cisla) #tento "command" zamiesa cisla v liste
-   if cisla[0] == 1 or cisla[0] == 2: #tuto sa vlastne porovnava hodnota
+   if cisla[0] == 1: #tuto sa vlastne porovnava hodnota
       color1 = "orange"
+      id1 = 1
    else:
       color1 = "green"
-   if cisla[1] == 1 or cisla[1] == 2:
+      id1 = 2
+   if cisla[1] == 1:
       color2 = "orange"
+      id2 = 1
    else:
       color2 = "green"
-   if cisla[2] == 1 or cisla[2] == 2:
+      id2 = 2
+   if cisla[2] == 1:
       color3 = "orange"
+      id3 = 1
    else:
       color3 = "green"
-   if cisla[3] == 1 or cisla[3] == 2:
+      id3 = 2
+   if cisla[3] == 1:
       color4 = "orange"
+      id4 = 1
    else:
       color4 = "green"
+      id4 = 2
    nn = y / 3
    yy = x / 2.5
    canvas.create_rectangle(yy, nn, yy + 60, nn + 90, fill=color1)
@@ -80,7 +93,15 @@ def dvadva():
    canvas.create_rectangle(yy, nn + 125, yy + 60, nn + 90 + 125, fill=color3)
    canvas.create_rectangle(yy + 95, nn + 125, yy + 60 + 95, nn + 90 + 125, fill=color4)
    canvas.pack()
-
+   c1 = Card(id1, yy, nn, yy + 60, nn + 90, canvas)#vytvorime a nastavime parametre karty
+   c2 = Card(id2, yy + 95, nn, yy + 60 + 95, nn + 90, canvas)
+   c3 = Card(id3, yy, nn + 125, yy + 60, nn + 90 + 125, canvas)
+   c4 = Card(id4, yy + 95, nn + 125, yy + 60 + 95, nn + 90 + 125, canvas)
+   canvas.tag_bind(c1.back, '<ButtonPress-1>', onObjectClick) #prepojime funkciu so zadnou stranou karty
+   canvas.tag_bind(c2.back, '<ButtonPress-1>', onObjectClick)
+   canvas.tag_bind(c3.back, '<ButtonPress-1>', onObjectClick)
+   canvas.tag_bind(c4.back, '<ButtonPress-1>', onObjectClick)
+   canvas.pack()
 def myFunc():
     print(spin.get())
     a = int(spin.get())
@@ -95,14 +116,26 @@ def myFunc():
     canvas.create_rectangle(d, 1, b, 80, fill='blue')
     canvas.pack()
 
+krat = 1
+
+#funkcia volana po kliknuti na kartu
 def onObjectClick(event):
-    canvas.delete(event.widget.find_closest(event.x, event.y))
-
-#priklad pouzitia novovytvorenej triedy Card
-c1 = Card(0, 800 / 2.5, 600 / 3, 800 / 2.5 + 60, 600 / 3 + 90, canvas) #vytvorime a nastavime parametre karty
-canvas.tag_bind(c1.back, '<ButtonPress-1>', onObjectClick) #prepojime funkciu so zadnou stranou karty
-canvas.pack() 
-
+    clicked_card = canvas.delete(event.widget.find_closest(event.x, event.y)) #zistime na chrbat ktorej karty bolo kliknute
+    global krat
+    global card_id1
+    global card_id2
+    if krat == 1:
+       card_id1 = card.id
+       krat = 2
+    else:
+       card_id2 = card.id
+       krat = 1
+       if card_id1 == card_id2:
+          print("zhoda!")
+       else:
+          print("Nezhoda!")
+   
+canvas.pack()
 #ciselnik pridavame do okna, moze sa hybat v rozsahu hodnot 0 az 300 a zmena jeho hodnoty vola funkciu myFunc
 spin = Spinbox(root, from_ = 0, to = 300, command=myFunc)
 #pridanie ciselniku
