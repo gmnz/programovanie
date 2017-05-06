@@ -125,7 +125,16 @@ def onObjectClick(event):
     global card_id1
     global card_id2
     if krat == 1:
-       card_id1 = card.id
+       card_id1 = card.id #premenna card neexistuje, to je trieda
+       #existuje premenna clicked_card, ktora vsak neobsahuje id karty
+       #na ktoru bolo kliknute, ale chrbat karty, na ktoru bolo kliknute
+       #preto ak sa pozries na moj fork, tak zistis,
+       #ze ja som to riesil tak, ze som si vsetky vytvorene karty hodil
+       #do zoznamu deck (balicek) a ked mi pouzivatel klikol na kartu
+       #tak som chrbty kariet v balicku porovnaval s clicked_card
+       #ak sa chrbty rovnaju, tak si danu kartu das napr. do card1
+       #ked druhy krat klikne, tak spravis to iste a das ju do card2
+       #potom porovnas if card1.id == card2.id
        krat = 2
     else:
        card_id2 = card.id
